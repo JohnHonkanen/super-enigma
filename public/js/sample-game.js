@@ -47,7 +47,7 @@ function create() {
             }
         });
     });
-    
+
     this.socket.on('playerMoved', function (playerInfo) {
         self.otherPlayers.getChildren().forEach(function (otherPlayer) {
             if (playerInfo.playerId === otherPlayer.playerId) {
