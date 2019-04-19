@@ -181,7 +181,7 @@
 
 	         <hr />      	         
 
-	         <p>-	Design / assets sketch (character, topdown game environment design etc)
+	         <p>-	Design / assets sketch (character, top down game environment design etc)
 				-	UML class diagram
 				-	UML state transition diagram
 
@@ -189,14 +189,46 @@
 
 	         <h2>Features Implemented<span>.</span></h2>
 	         	<p>
-	         	-	Basic features (movement, collision etc)
-				-	Database
-					o	Draw a table diagram to show the design of your database (showing all tables with its columns including the columns’ properties)
-				-	Multiplayer 
-					o	What kind of approach you adopted (centralised / p2p / mix etc)
+					<ul style = "list-style: circle">
+						<li>Basic Features:</li>
+							<ul style = "list-style-type:disc;">
+								<li>Selecting territories: Any mouse click to select and interact with territories.</li>
+								<li>Deselect territories: Right mouse click.</li>
+								<li>Render scene using Phaser.</li>
+								<li>Sending attack / defense commands to and from any player controlled territory to another player / non-player controlled territory.</li>
+								<li>Change scene between Start menu and game session.</li>
+								<li>Each territory generates points and units, which determine the player's score. The player with the highest score wins.</li>
+								<li>Power-ups to boost player owned territories. </li>
+							</ul>
+
+							<p>
+								<li>Database:</li>
+									<ul style = "list-style-type:disc;">
+										<li>Due to the simplicity of the game, there was no need for a database.</li>
+									</ul>
+							</p>
+
+							<li>Multiplayer</li>
+								<ul style = "list-style-type:disc;">
+									<li>A client-server multiplayer approach was adopted for Super-Enigma. By adopting a client-server multiplayer strategy, some or all game data
+									can be stored centrally and controlled centrally, which can help discourage players from performing client sided cheating to gain an extra edge during game-play.</li>
+								</ul>
+
+							<p>
+								<li>Design-pattern:</li>
+								<ul style = "list-style-type:disc;">
+									<li>Singleton-esque patterns were used to manage game-systems</li>
+									<li>Visitor patterns were used to send current context to function calls.</li>
+									<li>Observer patterns were used to manage multiplayer callbacks.</li>
+								</ul>
+							</p>
+
+					</ul>
+
 				-	Design Pattern
 					o	What are the design pattern implemented and which part of the code / features the design pattern is implemented?
 				-	Other features such as modularity?
+
 				</p>
 
 	         <h2>Gameplay / game mechanics / game control<span>.</span></h2>
