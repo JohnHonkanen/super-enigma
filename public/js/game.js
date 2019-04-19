@@ -13,6 +13,7 @@ const SystemVar = {
     StartTroops: 50,
     ActionLineWidth: 4,
     ActionLineColor: 0xaa00aa,
+    TroopTravelSpeed: 80,
 }
 
 
