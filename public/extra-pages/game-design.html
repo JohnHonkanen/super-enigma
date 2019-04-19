@@ -27,7 +27,7 @@
 
    <!-- favicons
 	================================================== -->
-	<link rel="shortcut icon" href="favicon.png" >
+	<link rel="shortcut icon" href="../favicon.png" >
 
 </head>
 
@@ -181,16 +181,14 @@
 
 	         <hr />      	         
 
-	         <p>-	Design / assets sketch (character, top down game environment design etc)
-				-	UML class diagram
-				-	UML state transition diagram
-
+	         <p>
+				 See the Super-Enigma prototype demo in action <a href = "../index.html#portfolio">here</a>.
 	         </p>
 
 	         <h2>Features Implemented<span>.</span></h2>
 	         	<p>
 					<ul style = "list-style: circle">
-						<li>Basic Features:</li>
+						<li><h3>Basic Features:</h3></li>
 							<ul style = "list-style-type:disc;">
 								<li>Selecting territories: Any mouse click to select and interact with territories.</li>
 								<li>Deselect territories: Right mouse click.</li>
@@ -202,20 +200,20 @@
 							</ul>
 
 							<p>
-								<li>Database:</li>
+								<li><h3>Database:</h3></li>
 									<ul style = "list-style-type:disc;">
 										<li>Due to the simplicity of the game, there was no need for a database.</li>
 									</ul>
 							</p>
 
-							<li>Multiplayer</li>
+							<li><h3>Multiplayer:</h3></li>
 								<ul style = "list-style-type:disc;">
 									<li>A client-server multiplayer approach was adopted for Super-Enigma. By adopting a client-server multiplayer strategy, some or all game data
 									can be stored centrally and controlled centrally, which can help discourage players from performing client sided cheating to gain an extra edge during game-play.</li>
 								</ul>
 
 							<p>
-								<li>Design-pattern:</li>
+								<li><h3>Design-pattern:</h3></li>
 								<ul style = "list-style-type:disc;">
 									<li>Singleton-esque patterns were used to manage game-systems</li>
 									<li>Visitor patterns were used to send current context to function calls.</li>
@@ -223,18 +221,55 @@
 								</ul>
 							</p>
 
+							<li><h3>Modularity:</h3></li>
+							<ul style = "list-style-type:disc;">
+								<li>No modularity per say was introduced to Super-Enigma. As the software was built using Javascript, the code was written in a functional programming-esque manner.
+								Which consequently meant that there was no OOP school of thought applied. The closest Super-Enigma comes to modularity is how the server and data flows through different
+								"modules" i.e functions that specialize in taking care of specific tasks. </li>
+							</ul>
+
 					</ul>
 
-				-	Design Pattern
-					o	What are the design pattern implemented and which part of the code / features the design pattern is implemented?
-				-	Other features such as modularity?
-
 				</p>
 
-	         <h2>Gameplay / game mechanics / game control<span>.</span></h2>
+	         <h2>Game-play / game mechanics / game control<span>.</span></h2>
 	         	<p>
-				The game will be played out using a mixture of mouse and keyboard control. The mouse will be used to interact with the different territories, to give unit instructions and to use skills to powerup territories. 
+					The game will be played out using a mixture of mouse and keyboard controls and will encourage the player to be strategic with their unit placement and territory acquisition.
+					The mouse will be used to interact with the different territories, to give unit instructions and to use skills to power-up territories.
+					The territory unit count will increase every game tick as will the players points. Therefore, players will be encouraged to react fast,
+					or slow depending on the desired outcome for the player.
 				</p>
+
+				<p>
+					Points acquired by the player can be spent to utilize temporary power-up boosts to any of the players territory. Boosts can vary between increased unit
+					production or increased movement to give the players defense or attack an extra edge.
+				</p>
+
+				<p>
+					Similar to points, units will also tick up every game tick. Units can be sent to defend, attack and acquire new territory for the player.
+					When movement orders are given to a territory, half the units in the territory will be given the order and the instruction will be carried out immediately.
+					One territory can perform multiple instructions provided it's not towards the same territory. For example: Territory A has sent instructions to attack territory B and C.
+					However, Territory A cannot send extra troops to attack territory B until the previous attack instruction is completed.
+				</p>
+
+				<p>
+					Units that have received an attack / defend order will move to the selected territory. Depending on the distance from the units territory of origin to the final destination,
+					the time it takes for the instruction to be carried out may be longer. Units that attack a defended territory will lose troop counts on an 1 to 1 basis, i.e equal to the troops defending.
+					For example: An attacking territory sends 200 units to a defending territory with 150 units. After the attack instruction is completed the territory is won by the attacking player
+					and 50 units remain to defend the newly acquired territory.
+
+				<p>
+					For unit counts to increase on a players territory, there needs to be at least 30 units present. Therefore, the player may need to ensure that after a successful territory takeover that additional
+					units are sent to defend the new territory while maintaining at least 30 units to allow the territory to produce extra units. The total number of units on a single territory is 1,0000. If the territory exceeds 1,000 units, the unit production
+					on the territory will be paused until the total unit count on the territory is less than 1,000.
+				</p>
+				</p>
+
+				<p>
+					Players can join whenever they want, however players can only participate by taking over a territory that is not acquired by any player.
+					If there is no available territory, the player can only observe. As soon as all the territory on the map is acquired by a single player, the player wins.
+				</p>
+
 	      </div>
 
       </div> <!-- end section-head -->
