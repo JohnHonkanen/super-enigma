@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="685009f7-7837-4670-8c01-b6970f86673e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/game/js/ui/button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authoritative_server/js/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/authoritative_server/js/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/game/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/game/game.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/game/js/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/game/js/game.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/game/assets/audio/background-looping.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/game/assets/audio/background-looping.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/game/assets/background/bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/game/assets/sky.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/game/js/sound.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/game/js/level1.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/game/js/level1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/game/js/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/game/js/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/super-enigma-website/extra-pages/game-design.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/super-enigma-website/extra-pages/game-design.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -59,11 +60,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/game/js/level1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="116" column="29" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="29" />
+            <state relative-caret-position="238">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#1397#1886#0" />
                 <element signature="e#1988#2084#0" />
@@ -96,16 +97,16 @@
         <entry file="file://$PROJECT_DIR$/public/game/js/ui/button.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="335">
-              <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+              <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/authoritative_server/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="173" column="54" lean-forward="true" selection-start-line="173" selection-start-column="54" selection-end-line="173" selection-end-column="54" />
+            <state relative-caret-position="1704">
+              <caret line="174" column="51" selection-start-line="173" selection-start-column="24" selection-end-line="174" selection-end-column="51" />
               <folding>
                 <element signature="n#!!block;n#removePlayer#0" />
                 <element signature="n#!!block;n#resolveBaseAction#0" />
@@ -127,7 +128,7 @@
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
-              <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+              <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -209,8 +210,8 @@
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/public/game/js/game.js" />
         <option value="$PROJECT_DIR$/public/game/js/ui/button.js" />
-        <option value="$PROJECT_DIR$/public/game/js/level1.js" />
         <option value="$PROJECT_DIR$/authoritative_server/js/game.js" />
+        <option value="$PROJECT_DIR$/public/game/js/level1.js" />
       </list>
     </option>
   </component>
@@ -341,7 +342,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94080000" />
+    <option name="totallyTimeSpent" value="94263000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -489,7 +490,7 @@
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -503,14 +504,25 @@
     <entry file="file://$PROJECT_DIR$/public/game/js/ui/button.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
-          <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+          <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authoritative_server/js/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1704">
+          <caret line="174" column="51" selection-start-line="173" selection-start-column="24" selection-end-line="174" selection-end-column="51" />
+          <folding>
+            <element signature="n#!!block;n#removePlayer#0" />
+            <element signature="n#!!block;n#resolveBaseAction#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/game/js/level1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="116" column="29" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="29" />
+        <state relative-caret-position="238">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#1397#1886#0" />
             <element signature="e#1988#2084#0" />
@@ -525,17 +537,6 @@
             <element signature="n#!!block;n#performBaseAction#0" />
             <element signature="n#!!block;n#addCombat#0" />
             <element signature="n#!!block;n#generateUniqueNum#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/authoritative_server/js/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="173" column="54" lean-forward="true" selection-start-line="173" selection-start-column="54" selection-end-line="173" selection-end-column="54" />
-          <folding>
-            <element signature="n#!!block;n#removePlayer#0" />
-            <element signature="n#!!block;n#resolveBaseAction#0" />
           </folding>
         </state>
       </provider>

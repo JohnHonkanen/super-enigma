@@ -18,6 +18,7 @@ class Level1 extends Phaser.Scene{
         this.load.image('base', 'assets/circle.png');
         this.load.image('attack', 'assets/attack.png');
         this.load.image('defend', 'assets/shield.png');
+
         this.load.image('button1', 'assets/buttons/buttons_01.png');
         this.load.image('button2', 'assets/buttons/buttons_02.png');
         this.load.image('button3', 'assets/buttons/buttons_03.png');
@@ -37,9 +38,13 @@ class Level1 extends Phaser.Scene{
         this.load.image('cp3', 'assets/cap3.png');
 
         this.UI.preload();
+
+        this.load.image('bg', 'assets/background/bg.jpg');
+
     }
 
     create() {
+        this.add.image(0,0, 'bg').setOrigin(0);
         this.input.mouse.disableContextMenu();
         this.input.setDefaultCursor('url(assets/cursors/cursor.cur), pointer');
         var self = this;
