@@ -1,8 +1,12 @@
-const UIManager = {
-    upgradePanelIsOpen : true,
-    ESCKeyDown: false,
-}
 
+const UIManager = {
+    upgradePanelIsOpen : false,
+    ESCKeyDown: false,
+    upgradeButtons: {
+        button1: null,
+        button2: null,
+    },
+}
 class Level1 extends Phaser.Scene{
     constructor(){
         super({key:"Level1"});
@@ -14,6 +18,23 @@ class Level1 extends Phaser.Scene{
         this.load.image('base', 'assets/circle.png');
         this.load.image('attack', 'assets/attack.png');
         this.load.image('defend', 'assets/shield.png');
+        this.load.image('button1', 'assets/buttons/buttons_01.png');
+        this.load.image('button2', 'assets/buttons/buttons_02.png');
+        this.load.image('button3', 'assets/buttons/buttons_03.png');
+        this.load.image('speed1', 'assets/buttons/speed_upgrade_01.png');
+        this.load.image('speed2', 'assets/buttons/speed_upgrade_02.png');
+        this.load.image('speed3', 'assets/buttons/speed_upgrade_03.png');
+        this.load.image('storage1', 'assets/buttons/storage_upgrade_01.png');
+        this.load.image('storage2', 'assets/buttons/storage_upgrade_02.png');
+        this.load.image('storage3', 'assets/buttons/storage_upgrade_03.png');
+
+        this.load.image('sp1', 'assets/speed1.png');
+        this.load.image('sp2', 'assets/speed2.png');
+        this.load.image('sp3', 'assets/speed3.png');
+
+        this.load.image('cp1', 'assets/cap1.png');
+        this.load.image('cp2', 'assets/cap2.png');
+        this.load.image('cp3', 'assets/cap3.png');
 
         this.UI.preload();
     }
@@ -76,6 +97,8 @@ class Level1 extends Phaser.Scene{
                 self.bases[it].troops = base.troops;
                 self.bases[it].text.text = base.troops;
                 self.bases[it].owner = base.owner;
+                self.bases[it].speed = base.speed;
+                self.bases[it].capacity = base.capacity;
                 if(base.owner== null){
                     self.bases[it].sprite.clearTint();
                 }
@@ -87,6 +110,23 @@ class Level1 extends Phaser.Scene{
                         self.bases[it].sprite.setTint(SystemVar.PlayerColor);
                     }
                 }
+
+                //speed
+                var capacity =self.bases[it].capacity;
+                self.bases[it].capIcon.setPosition(
+                    (capacity > 0) ? self.bases[it].x-55: -100,
+                    self.bases[it].y+10,
+                )
+
+                self.bases[it].capIcon.setTexture((capacity == 1)? 'cp1': (capacity==2) ? 'cp2' : 'cp3');
+
+                var speed =self.bases[it].speed;
+                self.bases[it].speedIcon.setPosition(
+                    (speed > 0) ? self.bases[it].x-55: -100,
+                    self.bases[it].y-10,
+                )
+
+                self.bases[it].speedIcon.setTexture((speed == 1)? 'sp1': (speed==2) ? 'sp2' : 'sp3');
             });
 
             for(const o of Object.values(combatManager.combats)){
@@ -110,9 +150,15 @@ class Level1 extends Phaser.Scene{
             addCombat(self, base1, base2);
         });
         //Recieve Combat Resolve Status :: TODO
-        this.socket.on('resolveCombat', function(base1, base2){
+        this.socket.on('resolveCombat', function(base1, base2, state){
             if(base2.owner == self.player.playerId){
                 self.bases[base2.id].sprite.setTint(SystemVar.PlayerColor);
+                if(state == 1){
+                    self.bases[base2.id].speed =  0;
+                    self.bases[base2.id].capacity= 0;
+                    self.bases[base2.id].capIcon.setPosition( -100, 0);
+                    self.bases[base2.id].speedIcon.setPosition( -100, 0);
+                }
             }
 
             let id1 = generateUniqueNum(base1.x,base1.y),
@@ -128,6 +174,8 @@ class Level1 extends Phaser.Scene{
             CombatManager.combats
                 [id1]
                 [id2].text.destroy();
+
+
 
             delete CombatManager.combats
                 [id1]
@@ -148,6 +196,12 @@ class Level1 extends Phaser.Scene{
             self.actionData.selected = null;
             self.actionData.hover = null;
             self.actionData.started = false;
+            self.actionData.actionLineIcon.setPosition(-100,-100);
+            self.actionData.actionText.setPosition(-100,-100);
+        });
+
+        this.socket.on('basePowerUpUpdate', function(id, speed, cap){
+            console.log("base updated");
         });
 
         //Mouse Pointer Event
@@ -160,6 +214,7 @@ class Level1 extends Phaser.Scene{
                     self.actionData.actionText.x = -1000;
                     self.actionData.selected = null;
                     self.actionData.hover = null;
+                    moveButtonTo(-100,-100);
                 }
             }
         });
@@ -191,6 +246,46 @@ class Level1 extends Phaser.Scene{
             //Syncing Panel with UI states
             obj.isOpen = UIManager.upgradePanelIsOpen;
         });
+
+        var button1 = new Button(self, 500,320,
+            {img1: "storage1", img2: "storage2", img3: "storage3"},
+            "Troop Max Upgrade", function(){
+
+            if(self.actionData.selected.capacity < 4 && self.actionData.selected.troops > SystemVar.cost[self.actionData.selected.capacity]){
+                self.actionData.selected.capacity+=1;
+
+                self.socket.emit('basePowerup',
+                    self.actionData.selected.id,
+                    self.actionData.selected.speed,
+                    self.actionData.selected.capacity,
+                    SystemVar.cost[self.actionData.selected.capacity-1]);
+
+            }
+        });
+
+        var button2 = new Button(self, 500,355,
+            {img1: "speed1", img2: "speed2", img3: "speed3"},
+            "Troop Movement Upgrade", function(){
+                if(self.actionData.selected.speed < 4 && self.actionData.selected.troops > SystemVar.cost[self.actionData.selected.speed]){
+                    self.actionData.selected.speed+=1;
+
+                    self.socket.emit('basePowerup',
+                        self.actionData.selected.id,
+                        self.actionData.selected.speed,
+                        self.actionData.selected.capacity,
+                        SystemVar.cost[self.actionData.selected.speed-1]);
+                }
+        });
+
+        this.add.existing(button1);
+        this.add.existing(button2);
+
+        UIManager.upgradeButtons.button1 = button1;
+        UIManager.upgradeButtons.button2 = button2;
+
+        //offscreen
+        moveButtonTo(-100,-100);
+
     }
 
     update(wt, dt) {
@@ -206,7 +301,7 @@ class Level1 extends Phaser.Scene{
                 this.actionData.selected.x,this.actionData.selected.y,
                 pointer.worldX,pointer.worldY);
 
-
+            moveButtonTo(this.actionData.selected.x+65, this.actionData.selected.y-16);
             //Line Physics to find closest intersect
             var shortestDistance = -1;
             this.bases.forEach(function(el){
@@ -228,12 +323,11 @@ class Level1 extends Phaser.Scene{
                 }
             }, this);
 
-            if(this.actionData.drawActionLine){
-                this.graphics.strokeLineShape(this.actionData.actionLine);
-            }
-
-
             if(this.actionData.hover !== null){
+                if(this.actionData.drawActionLine){
+                    this.graphics.strokeLineShape(this.actionData.actionLine);
+                }
+
                 let midPoint =  Phaser.Geom.Line.GetMidPoint(this.actionData.actionLine);
                 this.actionData.actionLineIcon.x = midPoint.x;
                 this.actionData.actionLineIcon.y = midPoint.y;
@@ -245,7 +339,7 @@ class Level1 extends Phaser.Scene{
                 let base2 = this.actionData.hover;
 
                 let distance = Phaser.Math.Distance.Between(base1.x,base1.y,base2.x, base2.y);
-                let timeNeeded = Math.round(distance / SystemVar.TroopTravelSpeed);
+                let timeNeeded = Math.round(distance / (SystemVar.TroopTravelSpeed * SystemVar.speed[this.actionData.selected.speed]));
                 this.actionData.actionText.text = `${timeNeeded} seconds`;
 
                 if(this.actionData.hover.owner == this.actionData.selected.owner){
@@ -265,12 +359,11 @@ class Level1 extends Phaser.Scene{
             }
         }
 
+
         //Loop through combat manager
         for(const v1 of Object.values(CombatManager.combats)){
             for(const v2 of Object.values(v1)){
                 this.graphics.strokeLineShape(v2.line);
-                // v2.icon.setPosition(v2.icon.x + v2.dir.x * dt/1000 * SystemVar.TroopTravelSpeed,
-                //     v2.icon.y + v2.dir.y * dt/1000 * SystemVar.TroopTravelSpeed);
             }
         }
         this.UI.update();
@@ -302,8 +395,12 @@ function createBase(self,base){
         sprite: self.add.sprite(base.x,base.y, 'base').setInteractive(),
         shape: new Phaser.Geom.Circle(base.x, base.y, 50),
         text: self.add.text(base.x-10,base.y-50, 0, {align: 'center'}),
+        speedIcon:  self.add.sprite(-100,base.y-25, 'sp1'),
+        capIcon:  self.add.sprite(-100,base.y-0, 'cp1'),
         owner: base.owner,
         attacking: null,
+        speed: 0,
+        capacity: 0,
     };
 
     nBase.sprite.displayWidth = 100;
@@ -333,6 +430,8 @@ function createBase(self,base){
 }
 //Action Resolver
 function actionManager(self, baseId, base, action){
+    //UI is open
+    if(UIManager.upgradePanelIsOpen) return;
     //Take Control of Empty Base to Start
     let updateServer = false;
 
@@ -356,6 +455,7 @@ function actionManager(self, baseId, base, action){
         if(action.selected !== null && action.hover != null){
             performBaseAction(self,action.selected.id, action.hover.id);
             action.selected = null, action.hover = null;
+            moveButtonTo(-100,-100);
         }
     }
 
@@ -424,6 +524,11 @@ function addCombat(self,base1, base2){
 //Generate 1D Unique Number based on 2D values;
 function generateUniqueNum(x,y){
     return x*13+y*17;
+}
+//Upgrade Button mover help
+function moveButtonTo(x, y){
+    UIManager.upgradeButtons.button1.moveTo(x,y);
+    UIManager.upgradeButtons.button2.moveTo(x,y+37);
 }
 
 

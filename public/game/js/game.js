@@ -14,6 +14,8 @@ const SystemVar = {
     ActionLineWidth: 4,
     ActionLineColor: 0xaa00aa,
     TroopTravelSpeed: 80,
+    cost: [100,500,1000],
+    speed: [1,1.5,3,5],
 
     //UISettings
     MenuDepth: 500,
