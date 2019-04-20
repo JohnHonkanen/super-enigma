@@ -20,6 +20,14 @@ class Menu extends Phaser.Scene
         music.loop = true;
         music.play();
 
+        this.input.addDownCallback(function() {
+
+            if (game.sound.context.state === 'suspended') {
+                game.sound.context.resume();
+            }
+
+        });
+
         var startText = new MenuItem(this, 'Start Game', 100, 100, 'Level1');
 
     }
