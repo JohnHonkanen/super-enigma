@@ -14,6 +14,8 @@ class Menu extends Phaser.Scene
     create()
     {
         this.add.image(0,0, 'bg').setOrigin(0);
+        
+        this.logo = this.add.text(30, 100, 'Super Enigma', { font: '50px Arial' });
 
         const music = this.sound.add('music');
 
@@ -28,7 +30,9 @@ class Menu extends Phaser.Scene
 
         });
 
-        var startText = new MenuItem(this, 'Start Game', 100, 100, 'Level1');
+        var startText = new MenuItem(this, 'Start Game', 35, 200, 'Level1', 30, 'hover', 'select');
+        var hiScoreText = new MenuItem(this, 'Highscores', 35, 250, 'High Scores', 30, 'hover', 'select');
+        var exitText = new MenuItem(this, 'Exit', 35, 300, 'Exit', 30, 'hover', 'select');
 
     }
 }
