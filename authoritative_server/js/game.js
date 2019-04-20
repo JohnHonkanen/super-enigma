@@ -99,6 +99,18 @@ function create() {
         socket.on('resolveBaseAction', function(base1, base2){
             resolveBaseAction(socket,base1,base2);
         });
+
+        socket.on('restartServer', function(){
+            delete CombatManager.combats;
+            CombatManager.combats = {};
+            bases.forEach(function(base){
+                base.troops = 0;
+                base.owner = null;
+            });
+
+            socket.emit("newGame");
+
+        }, this);
     });
 }
 

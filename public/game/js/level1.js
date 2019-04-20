@@ -1,12 +1,21 @@
+const UIManager = {
+    upgradePanelIsOpen : true,
+    ESCKeyDown: false,
+}
+
 class Level1 extends Phaser.Scene{
     constructor(){
         super({key:"Level1"});
+
+        this.UI = new UIController(this);
     }
 
     preload() {
         this.load.image('base', 'assets/circle.png');
         this.load.image('attack', 'assets/attack.png');
         this.load.image('defend', 'assets/shield.png');
+
+        this.UI.preload();
     }
 
     create() {
@@ -125,22 +134,68 @@ class Level1 extends Phaser.Scene{
                 [id2];
         });
 
+        this.socket.on('newGame', function(){
+
+            for(const v1 of Object.values(CombatManager.combats)){
+                for(const v2 of Object.values(v1)){
+                    v2.icon.destroy();
+                    v2.text.destroy();
+                }
+            }
+
+            delete CombatManager.combats;
+            CombatManager.combats = {};
+            self.actionData.selected = null;
+            self.actionData.hover = null;
+            self.actionData.started = false;
+        });
+
         //Mouse Pointer Event
         this.input.on('pointerdown', function(pointer){
             if(pointer.rightButtonDown()){
-                self.actionData.selected.sprite.setTint(SystemVar.PlayerColor);
-                self.actionData.drawActionLine = false;
-                self.actionData.actionLineIcon.x = -1000;
-                self.actionData.actionText.x = -1000;
-                self.actionData.selected = null;
-                self.actionData.hover = null;
+                if(self.actionData.selected != null){
+                    self.actionData.selected.sprite.setTint(SystemVar.PlayerColor);
+                    self.actionData.drawActionLine = false;
+                    self.actionData.actionLineIcon.x = -1000;
+                    self.actionData.actionText.x = -1000;
+                    self.actionData.selected = null;
+                    self.actionData.hover = null;
+                }
             }
-        })
+        });
 
+        //Keyboard
+        this.input.keyboard.on("keydown-ESC", function(event){
+            if(!UIManager.ESCKeyDown){
+                UIManager.ESCKeyDown = true;
+                if(UIManager.upgradePanelIsOpen){
+                    UIManager.upgradePanelIsOpen = false;
+                }
+                else{
+                    //Open Menu/Quit
+                    console.log("quit");
+                    self.socket.emit("restartServer");
+                }
+            }
+        });
+
+        this.input.keyboard.on("keyup-ESC", function(event){
+            console.log("ESC UP");
+            UIManager.ESCKeyDown = false;
+        });
+
+        //Create Any Default UI
+        this.UI.create();
+        //Creat Custom UI
+        this.UI.createPanel(0,0,1000,1000, SystemVar.EnemyColor, function(obj){
+            //Syncing Panel with UI states
+            obj.isOpen = UIManager.upgradePanelIsOpen;
+        });
     }
 
     update(wt, dt) {
         //Graphics
+        var self = this;
         this.graphics.clear();
         //Handle Player Input
         if(this.actionData.selected !== null){
@@ -218,8 +273,8 @@ class Level1 extends Phaser.Scene{
                 //     v2.icon.y + v2.dir.y * dt/1000 * SystemVar.TroopTravelSpeed);
             }
         }
+        this.UI.update();
     }
-
 }
 
 
@@ -370,3 +425,5 @@ function addCombat(self,base1, base2){
 function generateUniqueNum(x,y){
     return x*13+y*17;
 }
+
+
