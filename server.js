@@ -20,7 +20,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/game/', function(req,res){
-   res.sendFile(__dirname + '/public/game.html');
+   res.sendFile(__dirname + '/public/game/game.html');
 });
 
 app.get('/sample/', function(req,res){
