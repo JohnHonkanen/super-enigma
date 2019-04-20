@@ -3,7 +3,7 @@ var config = {
     parent: 'phaser',
     width: '100%',
     height: '100%',
-    scene: [Level1]
+    scene: [Menu, Level1]
 };
 
 const SystemVar = {

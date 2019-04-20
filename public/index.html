@@ -1,14 +1,490 @@
 <!DOCTYPE html>
-<html>
-
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
+
+   <!--- basic page needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Super-Enigma</title>
+	<meta name="description" content="">  
+	<meta name="author" content="">
+
+   <!-- mobile specific metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+ 	<!-- CSS
+   ================================================== -->
+   <link rel="stylesheet" href="css/base.css">
+   <link rel="stylesheet" href="css/vendor.min.css">
+   <link rel="stylesheet" href="css/main.css">     
+
+   <!-- script
+   ================================================== -->
+	<script src="js/modernizr.js"></script>
+
+   <!-- favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.png" >
+
 </head>
 
 <body>
-<h1> Hello World </h1>
-<p><a href="game.html"> Go To Game Page</a></p>
-<p><a href="sample.html"> Go To Sample Page</a></p>
+
+	<!-- header
+   ================================================== -->
+   <header id="main-header">
+
+   	<div class="row">
+
+	      <div class="logo">
+	         <a href="index.html">Kreo</a>
+	      </div>
+
+	      <nav id="nav-wrap">         
+	         
+	         <a class="mobile-btn" href="#nav-wrap" title="Show navigation">
+	         	<span class="menu-icon">Menu</span>
+	         </a>
+         	<a class="mobile-btn" href="#" title="Hide navigation">
+         		<span class="menu-icon">Menu</span>
+         	</a>            
+
+	         <ul id="nav" class="nav">
+	            <li><a href="index.html">Home.</a></li>
+		         <li class="current"><a class="smoothscroll" href="#portfolio">Demo.</a></li>
+	            <li><a href="extra-pages/game-design.html">Game Design.</a></li>
+	            <li><a href="extra-pages/project-management.html">Project Management.</a></li>
+	            <li><a href="extra-pages/team.html">Team.</a></li>
+	         </ul> <!-- end #nav -->
+
+	      </nav> <!-- end #nav-wrap -->
+
+	      <ul class="header-social">
+	        	<li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+	        	<li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+	      </ul>      
+
+	   </div>
+
+   </header> <!-- end header -->
+
+
+   <!-- homepage hero
+   ================================================== -->
+   <section id="hero">	
+   	  
+		<div class="row hero-content">
+
+			<div class="twelve columns hero-container">
+
+			   <!-- hero-slider start-->
+			   <div id="hero-slider" class="flexslider">
+
+				   <ul class="slides">
+
+					   <!-- slide -->
+					   <li>
+						   <div class="flex-caption">
+								<h1 class="">Say hello to <span>"Super-Enigma"</span>. 
+								</h1>	
+									
+								<h3 class="">Super-Enigma is a real-time strategy (RTS) game of diplomacy, conflict and conquest for two or more players. </h3>				   
+							</div>						
+					   </li>
+				   </ul>
+
+			   </div> <!-- end hero-slider -->				   
+
+	      </div> <!-- end twelve columns-->
+
+		</div> <!-- end row -->	
+
+		<div id="more">
+		      <a class="smoothscroll" href="#portfolio">Learn more</a>
+		</div> 	
+
+   </section> <!-- end homepage hero -->
+
+
+   <!-- portfolio
+   ================================================== -->
+   <section id="portfolio">
+
+      <div class="row section-head">
+
+      	<div class="twelve columns">
+
+      		<h1>Our Latest Project<span>.</span></h1>
+
+	         <hr />               
+
+	         <p>The standard version of Super-Enigma is played in 2D map broken up into 20 territories. Each territory produces a unit per game tick and each territory can be instructed to move its units to another territory provided the destination can be reached by drawing a straight line from the starting territory to the end destination. 
+	         </p>
+
+           <p>The goal of the game is to take over all the opposing players territories. The more territories the player controls, the more units and points they can produce per game tick. Some territories can also provide a boost in unit and/or point production which will be vital for each player to secure to ensure their victory. 
+           </p>
+
+           <p>Territories are won and held by the player who have 30 or more units. Territories unit and point production can be boosted by the player using temporary skill boosts in exchange for their points. 
+           </p>
+
+           <p align="center"><iframe width="560" height="315" align="middle" src="https://www.youtube.com/embed/YE7VzlLtp-4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+          
+  	      </div>
+
+      </div> <!-- end section-head -->
+
+      <div class="row items">
+
+         <!-- portfolio-wrapper -->
+         <div id="portfolio-wrapper" class="bgrid-fourth s-bgrid-third tab-bgrid-half">
+
+            <div class="bgrid folio-item">
+               <div class="item-wrap">
+                  <a href="#modal-01">
+	                  <img src="images/portfolio/underwater.jpg" alt="Underwater">
+                     <div class="overlay"></div>                       
+                     <div class="portfolio-item-meta">
+     					      <h5>Feature 1</h5>
+                        <p>Demo</p>
+     					   </div> 
+                     <div class="link-icon"><i class="fa fa-plus"></i></div>
+                  </a>
+               </div>
+        		</div> <!-- item end -->
+
+            <div class="bgrid folio-item">
+               <div class="item-wrap">
+                  <a href="#modal-02">
+                     <img src="images/portfolio/hotel.jpg" alt="Hotel Sign">
+                     <div class="overlay">
+                      <div class="portfolio-item-meta">
+          					   <h5>Feature 2</h5>
+                           <p>Demo</p>
+          					</div>
+                     </div>
+                     <div class="link-icon"><i class="fa fa-plus"></i></div>
+                  </a>
+               </div>
+         	</div> <!-- item end -->
+
+            <div class="bgrid folio-item">
+               <div class="item-wrap">
+                  <a href="#modal-03">
+                     <img src="images/portfolio/beetle.jpg" alt="Beetle">                        
+                     <div class="overlay">
+                      <div class="portfolio-item-meta">
+          					   <h5>Feature 3</h5>
+                           <p>Demo</p>
+          					</div>
+                     </div>
+                     <div class="link-icon"><i class="fa fa-plus"></i></div>
+                  </a>
+               </div>
+         	</div> <!-- item end -->
+
+            <div class="bgrid folio-item">
+               <div class="item-wrap">
+                  <a href="#modal-04">
+                     <img src="images/portfolio/banjo-player.jpg" alt="Banjo Player">
+                     <div class="overlay">
+                      <div class="portfolio-item-meta">
+          					   <h5>Feature 4</h5>
+                           <p>Demo</p>
+          					</div>
+                     </div>
+                     <div class="link-icon"><i class="fa fa-plus"></i></div>
+                  </a>
+               </div>
+         	</div> <!-- item end -->
+
+            <div class="bgrid folio-item">
+               <div class="item-wrap">
+                  <a href="#modal-05">
+                   <img src="images/portfolio/lighthouse.jpg" alt="Lighthouse">
+                     <div class="overlay">
+                      <div class="portfolio-item-meta">
+          					   <h5>Feature 5</h5>
+                           <p>Demo</p>
+          					</div>
+                     </div>
+                     <div class="link-icon"><i class="fa fa-plus"></i></div>
+                  </a>
+               </div>
+         	</div> <!-- item end -->
+
+            <div class="bgrid folio-item">
+               <div class="item-wrap">
+                  <a href="#modal-06">
+                     <img src="images/portfolio/girl.jpg" alt="Girl Stuff">
+                     <div class="overlay">
+                      <div class="portfolio-item-meta">
+          					   <h5>Feature 6</h5>
+                           <p>Demo</p>
+          					</div>
+                     </div>
+                     <div class="link-icon"><i class="fa fa-plus"></i></div>
+                  </a>
+               </div>
+         	</div> <!-- item end -->
+
+            <div class="bgrid folio-item">
+               <div class="item-wrap">
+                  <a href="#modal-07">                        
+                     <img src="images/portfolio/coffee.jpg" alt="Coffee Cup">                       
+                     <div class="overlay">
+                      <div class="portfolio-item-meta">
+          					   <h5>Feature 7</h5>
+                           <p>Demo</p>
+          					</div>
+                     </div>
+                     <div class="link-icon"><i class="fa fa-plus"></i></div>
+                  </a>
+               </div>
+         	</div> <!-- item end -->
+
+            <div class="bgrid folio-item">
+               <div class="item-wrap">
+                  <a href="#modal-08">
+                     <img src="images/portfolio/judah.jpg" alt="Judah">
+                     <div class="overlay">
+                      	<div class="portfolio-item-meta">
+        					      <h5>Feature 8</h5>
+                           <p>Demo</p>
+        					   </div>
+                     </div>
+                     <div class="link-icon"><i class="fa fa-plus"></i></div>                     
+                  </a>
+               </div>
+       		</div>  <!-- item end -->
+
+         </div> <!-- end portfolio-wrapper -->
+         
+
+         <!-- modal popup
+	   	========================================================= -->
+         <div id="modal-01" class="popup-modal mfp-hide">
+
+		      <div class="media">
+	      		<img src="images/portfolio/modals/m-underwater.jpg" alt="Underwater" />
+	      	</div>
+
+		      <div class="description-box">
+			      <h4>Feature 1</h4>
+			      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+               <span class="categories">This is a feature demonstration</span>
+		      </div>
+
+            <div class="link-box group">
+            	<a href="#" class="popup-modal-dismiss">Close</a>         
+            </div>
+
+	      </div><!-- modal-01 end -->
+
+         <div id="modal-02" class="popup-modal mfp-hide">
+
+		      <div class="media">
+	      		<img src="images/portfolio/modals/m-hotel.jpg" alt="Hotel Sign" />
+	      	</div>
+
+		      <div class="description-box">
+			      <h4>Feature 2</h4>
+			      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+               <span class="categories">This is a feature demonstration</span>
+		      </div>
+
+            <div class="link-box">            	
+		         <a href="#" class="popup-modal-dismiss">Close</a>
+            </div>
+
+	      </div><!-- modal-02 end -->
+
+         <div id="modal-03" class="popup-modal mfp-hide">
+
+		      <div class="media">
+	      		<img src="images/portfolio/modals/m-beetle.jpg" alt="" />
+	      	</div>
+
+		      <div class="description-box">
+			      <h4>Feature 3</h4>
+			      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+               <span class="categories">This is a feature demonstration</span>
+		      </div>
+
+            <div class="link-box">
+		         <a href="#" class="popup-modal-dismiss">Close</a>
+            </div>
+
+	      </div><!-- modal-03 end -->
+
+			<div id="modal-04" class="popup-modal mfp-hide">
+
+		      <div class="media">
+	      		<img src="images/portfolio/modals/m-banjo-player.jpg" alt="" />
+	      	</div>
+
+		      <div class="description-box">
+			      <h4>Feature 4</h4>
+			      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+               <span class="categories">This is a feature demonstration</span>
+		      </div>
+
+            <div class="link-box">
+		         <a href="#" class="popup-modal-dismiss">Close</a>
+            </div>
+
+	      </div><!-- modal-04 end -->
+
+	      <div id="modal-05" class="popup-modal slider mfp-hide">	
+
+	      	<div class="media">
+	      		<img src="images/portfolio/modals/m-lighthouse.jpg" alt="" />
+	      	</div>      	
+
+		      <div class="description-box">
+			      <h4>Feature 5</h4>		      
+
+			      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+
+			      <div class="categories">This is a feature demonstration</div>
+               
+		      </div>
+
+            <div class="link-box">
+		         <a href="#" class="popup-modal-dismiss">Close</a>
+            </div>		      
+
+	      </div><!-- modal-05 end -->
+
+	      <div id="modal-06" class="popup-modal mfp-hide">
+
+		      <div class="media">
+	      		<img src="images/portfolio/modals/m-girl.jpg" alt="" />
+	      	</div>	
+
+		      <div class="description-box">
+			      <h4>Feature 6</h4>			      
+
+			      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+
+			      <div class="categories">This is a feature demonstration</div>
+               
+		      </div>
+
+            <div class="link-box">
+		         <a href="#" class="popup-modal-dismiss">Close</a>
+            </div>
+
+	      </div><!-- modal-06 end -->
+
+	      <div id="modal-07" class="popup-modal mfp-hide">
+
+		      <div class="media">
+	      		<img src="images/portfolio/modals/m-coffee.jpg" alt="" />
+	      	</div>	
+
+		      <div class="description-box">
+			      <h4>Feature 7</h4>			      
+
+			      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+
+			      <div class="categories">This is a feature demonstration</div>
+               
+		      </div>
+
+            <div class="link-box">
+		         <a href="#" class="popup-modal-dismiss">Close</a>
+            </div>
+
+	      </div><!-- modal-07 end -->
+
+	      <div id="modal-08" class="popup-modal mfp-hide">
+
+		      <div class="media">
+	      		<img src="images/portfolio/modals/m-judah.jpg" alt="" />
+	      	</div>	
+
+		      <div class="description-box">
+			      <h4>Feature 8</h4>			      
+
+			      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+
+			      <div class="categories">This is a feature demonstration</div>
+               
+		      </div>
+
+            <div class="link-box">
+		         <a href="#" class="popup-modal-dismiss">Close</a>
+            </div>
+
+	      </div><!-- modal-08 end -->
+
+      </div>  <!-- end row -->
+
+   </section> <!-- end portfolio -->
+
+   <!-- Footer
+   ================================================== -->
+   <footer>
+
+      <div class="row">  
+
+      	<div class="twelve columns content group">
+      		
+				<ul class="social-links">
+               <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+               <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+               <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>               
+               <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+               <li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+               <li><a href="#"><i class="fa fa-flickr"></i></a></li>               
+               <li><a href="#"><i class="fa fa-skype"></i></a></li>
+            </ul>
+
+            <hr />
+
+            <div class="info">
+
+            	<div class="footer-logo"></div>
+
+	            <p>This is demo website built for the "Super-Enigma" web game developed for the COMP10057: "Web Games Development 2" assignment. 
+	            </p>	        
+
+	         </div>
+
+      	</div>           
+
+         <ul class="copyright">
+         	<li>&copy; Copyright 2019 Super-Enigma.</li> 
+            <li>Design by <a href="#">Team Enigma</a>. using based designs made by KREO</li>
+         </ul>
+
+         <div id="go-top">
+            <a class="smoothscroll" title="Back to Top" href="#hero">Back to Top<i class="fa fa-angle-up"></i></a>
+         </div>
+
+      </div> <!-- end row -->
+
+   </footer> <!-- end footer -->
+
+   <div id="preloader"> 
+    	<div id="loader"></div>
+   </div> 
+
+   <!-- Java Script
+   ================================================== --> 
+   <script src="js/jquery-1.11.3.min.js"></script>
+   <script src="js/jquery-migrate-1.2.1.min.js"></script>
+   <script src="js/jquery.flexslider-min.js"></script>
+   <script src="js/jquery.waypoints.min.js"></script>
+   <script src="js/jquery.validate.min.js"></script>
+   <script src="js/jquery.fittext.js"></script>
+   <script src="js/jquery.placeholder.min.js"></script>
+   <script src="js/jquery.magnific-popup.min.js"></script>  
+   <script src="js/main.js"></script>
+
 </body>
 
 </html>
