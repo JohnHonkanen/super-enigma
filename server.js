@@ -27,6 +27,7 @@ app.get('/sample/', function(req,res){
     res.sendFile(__dirname + '/public/sample.html');
 });
 
+var port = process.env.PORT | 8080;
 function setupAuthoritativePhaser() {
     JSDOM.fromFile(path.join(__dirname, 'authoritative_server/index.html'), {
         // To run the scripts in the html file
@@ -44,7 +45,7 @@ function setupAuthoritativePhaser() {
         dom.window.URL.revokeObjectURL = (objectURL) => {};
 
         dom.window.gameLoaded = () => {
-            server.listen(8081, function () {
+            server.listen(port, function () {
                 console.log(`Listening on ${server.address().port}`);
             });
         };

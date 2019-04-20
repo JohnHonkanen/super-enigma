@@ -114,6 +114,10 @@ function create() {
             bases.forEach(function(base){
                 base.troops = 0;
                 base.owner = null;
+                base.capacity = 0;
+                base.speed = 0;
+                base.troopSpeed = 1;
+                base.extraCapacity = 0;
             });
 
             socket.emit("newGame");
