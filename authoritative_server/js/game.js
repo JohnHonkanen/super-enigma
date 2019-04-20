@@ -9,7 +9,8 @@ const CombatManager = {
     combats: {},
 };
 const SystemVar = {
-    baseRefillRate: 100,
+    productionThreshold: 50,
+    baseRefillRate: 5,
     maxTroops: 1000,
     troopTravelSpeed: 80,
     cost: [100,500,1000],
@@ -144,7 +145,7 @@ function update(wt,delta) {
     baseRefilTimer+=delta/1000;
     if(baseRefilTimer > 1){
         bases.forEach(function(base){
-            if(base.troops > 30 && base.owner != null && base.troops < base.maxTroops+base.extraCapacity){
+            if(base.troops >= SystemVar.productionThreshold && base.owner != null && base.troops < base.maxTroops+base.extraCapacity){
                 base.troops += base.baseRefillRate + Math.floor(base.troops/100);
                 base.troops = (base.troops > base.maxTroops+base.extraCapacity)? base.maxTroops+base.extraCapacity: base.troops;
             }

@@ -111,8 +111,11 @@ class Level1 extends Phaser.Scene{
                     self.bases[it].sprite.setTint(SystemVar.EnemyColor);
                 }
                 else{
-                    if(base.owner == self.players.playerId && base !== self.actionData.selected){
-                        self.bases[it].sprite.setTint(SystemVar.PlayerColor);
+                    if(base.owner == self.player.playerId){
+                        if(self.actionData.selected == null){
+                            self.bases[it].sprite.setTint(SystemVar.PlayerColor);
+                        }
+
                     }
                 }
 
@@ -446,7 +449,6 @@ function actionManager(self, baseId, base, action){
             base.owner = self.player.playerId;
             base.troops = SystemVar.StartTroops;
             self.player.bases.push(baseId);
-            base.sprite.setTint(SystemVar.PlayerColor);
 
             updateServer = true;
         }

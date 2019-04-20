@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="685009f7-7837-4670-8c01-b6970f86673e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/authoritative_server/js/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/authoritative_server/js/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/game/js/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/game/js/game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/game/js/level1.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/game/js/level1.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -41,35 +42,33 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="219" />
-          <entry key="js" value="24929" />
+          <entry key="js" value="25049" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="219" />
-          <entry key="JavaScript" value="24929" />
+          <entry key="JavaScript" value="25049" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/game/js/level1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3215">
-              <caret line="532" column="27" lean-forward="true" selection-start-line="532" selection-start-column="27" selection-end-line="532" selection-end-column="27" />
+            <state relative-caret-position="417">
+              <caret line="118" column="21" lean-forward="true" selection-start-line="118" selection-start-column="21" selection-end-line="118" selection-end-column="21" />
               <folding>
-                <element signature="e#1397#1886#0" />
                 <element signature="e#1988#2084#0" />
                 <element signature="e#2145#2288#0" />
-                <element signature="e#2390#3920#0" />
                 <element signature="e#4028#4127#0" />
                 <element signature="e#4240#4884#0" />
                 <element signature="e#4972#5383#0" />
                 <element signature="e#5539#8277#0" />
                 <element signature="e#6003#6809#0" />
-                <element signature="n#!!block;n#actionManager#0" />
+                <element signature="n#!!block;n#addPlayer#0" />
                 <element signature="n#!!block;n#performBaseAction#0" />
                 <element signature="n#!!block;n#addCombat#0" />
                 <element signature="n#!!block;n#generateUniqueNum#0" />
@@ -99,8 +98,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/authoritative_server/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1432">
-              <caret line="119" column="39" selection-start-line="119" selection-start-column="39" selection-end-line="119" selection-end-column="39" />
+            <state relative-caret-position="-1853">
+              <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
               <folding>
                 <element signature="n#!!block;n#removePlayer#0" />
                 <element signature="n#!!block;n#resolveBaseAction#0" />
@@ -118,11 +117,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
+            <state relative-caret-position="-444">
+              <caret line="2" column="39" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -153,8 +152,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/game/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+            <state relative-caret-position="204">
+              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -178,6 +177,7 @@
       <find>between</find>
       <find>dis</find>
       <find>playerID</find>
+      <find>8081</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -201,11 +201,11 @@
         <option value="$PROJECT_DIR$/public/game/js/ui/uicontroller.js" />
         <option value="$PROJECT_DIR$/public/game/js/ui/Button.js" />
         <option value="$PROJECT_DIR$/public/game/game.html" />
-        <option value="$PROJECT_DIR$/public/game/js/game.js" />
         <option value="$PROJECT_DIR$/public/game/js/ui/button.js" />
-        <option value="$PROJECT_DIR$/public/game/js/level1.js" />
-        <option value="$PROJECT_DIR$/authoritative_server/js/game.js" />
         <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/authoritative_server/js/game.js" />
+        <option value="$PROJECT_DIR$/public/game/js/game.js" />
+        <option value="$PROJECT_DIR$/public/game/js/level1.js" />
       </list>
     </option>
   </component>
@@ -336,7 +336,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95528000" />
+    <option name="totallyTimeSpent" value="96494000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,13 +467,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/game/js/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/game/js/ui/button.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
@@ -495,32 +488,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/game/js/level1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3215">
-          <caret line="532" column="27" lean-forward="true" selection-start-line="532" selection-start-column="27" selection-end-line="532" selection-end-column="27" />
-          <folding>
-            <element signature="e#1397#1886#0" />
-            <element signature="e#1988#2084#0" />
-            <element signature="e#2145#2288#0" />
-            <element signature="e#2390#3920#0" />
-            <element signature="e#4028#4127#0" />
-            <element signature="e#4240#4884#0" />
-            <element signature="e#4972#5383#0" />
-            <element signature="e#5539#8277#0" />
-            <element signature="e#6003#6809#0" />
-            <element signature="n#!!block;n#actionManager#0" />
-            <element signature="n#!!block;n#performBaseAction#0" />
-            <element signature="n#!!block;n#addCombat#0" />
-            <element signature="n#!!block;n#generateUniqueNum#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/authoritative_server/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1432">
-          <caret line="119" column="39" selection-start-line="119" selection-start-column="39" selection-end-line="119" selection-end-column="39" />
+        <state relative-caret-position="-1853">
+          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
           <folding>
             <element signature="n#!!block;n#removePlayer#0" />
             <element signature="n#!!block;n#resolveBaseAction#0" />
@@ -530,8 +501,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
+        <state relative-caret-position="-444">
+          <caret line="2" column="39" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/game/js/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/game/js/level1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="118" column="21" lean-forward="true" selection-start-line="118" selection-start-column="21" selection-end-line="118" selection-end-column="21" />
+          <folding>
+            <element signature="e#1988#2084#0" />
+            <element signature="e#2145#2288#0" />
+            <element signature="e#4028#4127#0" />
+            <element signature="e#4240#4884#0" />
+            <element signature="e#4972#5383#0" />
+            <element signature="e#5539#8277#0" />
+            <element signature="e#6003#6809#0" />
+            <element signature="n#!!block;n#addPlayer#0" />
+            <element signature="n#!!block;n#performBaseAction#0" />
+            <element signature="n#!!block;n#addCombat#0" />
+            <element signature="n#!!block;n#generateUniqueNum#0" />
+          </folding>
         </state>
       </provider>
     </entry>

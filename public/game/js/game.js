@@ -10,7 +10,7 @@ const SystemVar = {
     EnemyColor: 0xFF0000,
     PlayerColor: 0x0000FF,
     HighlightColor: 0x00FF00,
-    StartTroops: 50,
+    StartTroops: 100,
     ActionLineWidth: 4,
     ActionLineColor: 0xaa00aa,
     TroopTravelSpeed: 80,
