@@ -15,9 +15,9 @@ class Menu extends Phaser.Scene
 
         var startText = new MenuItem(this, 'Start Game', 100, 100, 'Level1');
         const music = this.sound.add('music');
-
-        // //	play: function (marker, position, volume, loop, forceRestart)
-        music.play('', 0, 1, true);
+        
+        music.loop = true;
+        music.play();
 
 
 
