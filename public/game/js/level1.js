@@ -18,6 +18,7 @@ class Level1 extends Phaser.Scene{
         this.load.image('base', 'assets/circle.png');
         this.load.image('attack', 'assets/attack.png');
         this.load.image('defend', 'assets/shield.png');
+        this.load.image('white', 'assets/white_pixel.png');
 
         this.load.image('button1', 'assets/buttons/buttons_01.png');
         this.load.image('button2', 'assets/buttons/buttons_02.png');
@@ -63,6 +64,7 @@ class Level1 extends Phaser.Scene{
         this.actionData.actionLineIcon.displayHeight = 32;
         this.actionData.actionLineIcon.displayWidth = 32;
         this.actionData.actionLineIcon.depth = 100;
+        this.actionData.actionText.depth = 500;
 
         this.graphics = this.add.graphics({ lineStyle: { width: SystemVar.ActionLineWidth, color: SystemVar.ActionLineColor } });
         this.graphics.strokeLineShape(this.actionData.actionLine);
@@ -104,6 +106,7 @@ class Level1 extends Phaser.Scene{
                 self.bases[it].owner = base.owner;
                 self.bases[it].speed = base.speed;
                 self.bases[it].capacity = base.capacity;
+                self.bases[it].extraProduction = base.extraProduction;
                 if(base.owner== null){
                     self.bases[it].sprite.clearTint();
                 }
@@ -125,8 +128,13 @@ class Level1 extends Phaser.Scene{
                     (capacity > 0) ? self.bases[it].x-55: -100,
                     self.bases[it].y+10,
                 )
+                if(self.bases[it].extraProduction > 0){
+                    self.bases[it].productionInfo.text = `(+ ${self.bases[it].extraProduction})`;
+                }
+                else{
+                    self.bases[it].productionInfo.text = "";
+                }
 
-                self.bases[it].capIcon.setTexture((capacity == 1)? 'cp1': (capacity==2) ? 'cp2' : 'cp3');
 
                 var speed =self.bases[it].speed;
                 self.bases[it].speedIcon.setPosition(
@@ -164,6 +172,8 @@ class Level1 extends Phaser.Scene{
                 if(state == 1){
                     self.bases[base2.id].speed =  0;
                     self.bases[base2.id].capacity= 0;
+                    self.player.totalProduction -= self.bases[base2.id].extraProduction;
+                    self.bases[base2.id].extraProduction= 0;
                     self.bases[base2.id].capIcon.setPosition( -100, 0);
                     self.bases[base2.id].speedIcon.setPosition( -100, 0);
                 }
@@ -206,10 +216,6 @@ class Level1 extends Phaser.Scene{
             self.actionData.started = false;
             self.actionData.actionLineIcon.setPosition(-100,-100);
             self.actionData.actionText.setPosition(-100,-100);
-        });
-
-        this.socket.on('basePowerUpUpdate', function(id, speed, cap){
-            console.log("base updated");
         });
 
         //Mouse Pointer Event
@@ -257,30 +263,30 @@ class Level1 extends Phaser.Scene{
 
         var button1 = new Button(self, 500,320,
             {img1: "storage1", img2: "storage2", img3: "storage3"},
-            "Troop Max Upgrade", function(){
+            "+ Troop Tick", function(){
 
-            if(self.actionData.selected.capacity < 4 && self.actionData.selected.troops > SystemVar.cost[self.actionData.selected.capacity]){
-                self.actionData.selected.capacity+=1;
-
+            if(self.actionData.selected.troops > SystemVar.troopCost*self.player.totalProduction){
+                self.actionData.selected.extraProduction+=1;
+                self.player.totalProduction++;
                 self.socket.emit('basePowerup',
                     self.actionData.selected.id,
                     self.actionData.selected.speed,
-                    self.actionData.selected.capacity,
-                    SystemVar.cost[self.actionData.selected.capacity-1]);
+                    self.actionData.selected.extraProduction,
+                    SystemVar.troopCost*(self.player.totalProduction-1));
 
             }
         });
 
         var button2 = new Button(self, 500,355,
             {img1: "speed1", img2: "speed2", img3: "speed3"},
-            "Troop Movement Upgrade", function(){
+            "+ Speed Multiplier", function(){
                 if(self.actionData.selected.speed < 4 && self.actionData.selected.troops > SystemVar.cost[self.actionData.selected.speed]){
                     self.actionData.selected.speed+=1;
 
                     self.socket.emit('basePowerup',
                         self.actionData.selected.id,
                         self.actionData.selected.speed,
-                        self.actionData.selected.capacity,
+                        self.actionData.selected.extraProduction,
                         SystemVar.cost[self.actionData.selected.speed-1]);
                 }
         });
@@ -310,6 +316,8 @@ class Level1 extends Phaser.Scene{
                 pointer.worldX,pointer.worldY);
 
             moveButtonTo(this.actionData.selected.x+65, this.actionData.selected.y-16);
+            updateButtonCost(this.actionData.selected.extraProduction, this.actionData.selected.speed, self);
+
             //Line Physics to find closest intersect
             var shortestDistance = -1;
             this.bases.forEach(function(el){
@@ -385,6 +393,7 @@ function addPlayer(self, playerInfo, isPlayer){
     const player = {
         playerId: playerInfo.playerId,
         bases: [],
+        totalProduction: 0,
     }
 
     if(isPlayer){
@@ -409,6 +418,36 @@ function createBase(self,base){
         attacking: null,
         speed: 0,
         capacity: 0,
+        extraProduction: 0,
+        productionInfo: self.add.text(base.x-20,base.y-70, "(+ 10)", {align: 'center'}).setFontSize(13).setInteractive()
+            .on('pointerup', () => {
+                if(self.actionData.selected!==null){
+                    if(self.actionData.selected.id == nBase.id &&  self.actionData.selected.extraProduction > 0){
+                        self.actionData.selected.extraProduction--;
+                        self.player.totalProduction--;
+                        self.socket.emit('basePowerup',
+                            self.actionData.selected.id,
+                            self.actionData.selected.speed,
+                            self.actionData.selected.extraProduction,
+                            0);
+                    }
+                }
+
+            })
+            .on('pointerover', () => {
+                if(self.actionData.selected!==null) {
+                    if (self.actionData.selected.id == nBase.id) {
+                        nBase.productionInfo.setColor('#FF0000').setFontSize(15);
+                    }
+                }
+            })
+            .on('pointerout', () => {
+                if(self.actionData.selected!==null) {
+                    if (self.actionData.selected.id == nBase.id) {
+                        nBase.productionInfo.setColor('#FFFFFF').setFontSize(13);
+                    }
+                }
+            }),
     };
 
     nBase.sprite.displayWidth = 100;
@@ -536,6 +575,21 @@ function generateUniqueNum(x,y){
 function moveButtonTo(x, y){
     UIManager.upgradeButtons.button1.moveTo(x,y);
     UIManager.upgradeButtons.button2.moveTo(x,y+37);
+}
+
+function updateButtonCost(capacity, speed,self){
+
+    UIManager.upgradeButtons.button1.updateCost(SystemVar.troopCost * self.player.totalProduction);
+    UIManager.upgradeButtons.button1.text.text = `+1 Production`;
+
+
+    if(speed < 3){
+        UIManager.upgradeButtons.button2.updateCost(SystemVar.cost[speed]);
+        UIManager.upgradeButtons.button2.text.text = `x${SystemVar.speed[speed+1]} Movement`;
+    }
+    else{
+        UIManager.upgradeButtons.button2.moveTo(-100,0);
+    }
 }
 
 

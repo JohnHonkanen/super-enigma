@@ -10,12 +10,12 @@ const CombatManager = {
 };
 const SystemVar = {
     productionThreshold: 50,
-    baseRefillRate: 5,
-    maxTroops: 1000,
-    troopTravelSpeed: 80,
+    baseRefillRate: 1,
+    maxTroops: 5000,
+    troopTravelSpeed: 30,
     cost: [100,500,1000],
-    speed: [1,1.5,3,5],
-    capacity: [0,300, 500, 1000]
+    speed: [1,1.2,1.5,1.8],
+    capacity: [0,300, 600, 1000]
 };
 
 const config = {
@@ -46,25 +46,43 @@ function create() {
     const self = this;
     this.players = []; //arr init
     //Create Bases
-    //4 Corners
-    createBase(self, 100, 100, SystemVar.baseRefillRate);
-    createBase(self, 100, 300, SystemVar.baseRefillRate);
-    createBase(self, 300,100, SystemVar.baseRefillRate);
-
-    createBase(self, 1800, 100, SystemVar.baseRefillRate);
-    createBase(self, 1600, 100, SystemVar.baseRefillRate);
-    createBase(self, 1800, 300, SystemVar.baseRefillRate);
-
-    createBase(self, 1800, 700, SystemVar.baseRefillRate);
-    createBase(self, 1600, 900, SystemVar.baseRefillRate);
-    createBase(self, 1800, 900, SystemVar.baseRefillRate);
-
-    createBase(self, 100, 700, SystemVar.baseRefillRate);
-    createBase(self, 100, 900, SystemVar.baseRefillRate);
-    createBase(self, 300, 900, SystemVar.baseRefillRate);
-
     //Random in center
     //ToDO: Create a random spawner
+    var quadSpawner = function(x, y, c,troops){
+        createBase(self, x, y, (c)? troops[0]: 0, SystemVar.baseRefillRate);
+        createBase(self, x, y + 150, (c)? troops[1]: 0, SystemVar.baseRefillRate);
+        createBase(self, x, y -150, (c)? troops[2]: 0, SystemVar.baseRefillRate);
+        createBase(self, x + 150, y, (c)? troops[3]: 0, SystemVar.baseRefillRate);
+        createBase(self, x - 150, y, (c)? troops[4]: 0, SystemVar.baseRefillRate);
+
+    };
+
+    var horizontalSpawner = function(x,y, c, troops){
+
+        createBase(self, x, y, (c)? troops[0]: 0, SystemVar.baseRefillRate);
+        createBase(self, x, y + 150, (c)? troops[1]: 0, SystemVar.baseRefillRate);
+        createBase(self, x, y - 150, (c)? troops[2]: 0, SystemVar.baseRefillRate);
+    }
+
+    var verticalSpawner  = function(x,y, c, troops){
+
+        createBase(self, x, y, (c)? troops[0]: 0, SystemVar.baseRefillRate);
+        createBase(self, x + 150, y, (c)? troops[1]: 0, SystemVar.baseRefillRate);
+        createBase(self, x - 150, y, (c)? troops[2]: 0, SystemVar.baseRefillRate);
+    }
+
+    quadSpawner(1300,750, true, [300,300,300,50,300]);
+    quadSpawner(900,500, true, [1500,700,700,700,700]);
+    quadSpawner(500,250, true, [300,300,300,300,50]);
+
+    quadSpawner(1300,250, true, [300,300,300,50,300]);
+    quadSpawner(500,750, true, [300,300,300,300,50]);
+
+    horizontalSpawner(200, 500, false, []);
+    horizontalSpawner(1600, 500, false, []);
+
+    verticalSpawner(900, 150, false, []);
+    verticalSpawner(900, 850, false, []);
 
     io.on('connection', function (socket) {
         console.log('a user connected');
@@ -91,6 +109,7 @@ function create() {
                 bases[el].speed = 0;
                 bases[el].troopSpeed = 1;
                 bases[el].extraCapacity = 0;
+                bases[el].extraProduction = 0;
             });
 
             delete CombatManager.combats[socket.id];
@@ -119,20 +138,20 @@ function create() {
                 base.speed = 0;
                 base.troopSpeed = 1;
                 base.extraCapacity = 0;
+                base.extraProduction = 0;
             });
 
-            socket.emit("newGame");
+            io.emit("newGame");
 
         }, this);
 
-        socket.on('basePowerup', function(id, speed, capacity, cost){
+        socket.on('basePowerup', function(id, speed, extra, cost){
             bases[id].troops -= cost;
-            bases[id].extraCapacity = SystemVar.capacity[capacity];
             bases[id].troopSpeed = SystemVar.speed[speed];
-            bases[id].capacity = capacity;
+            bases[id].extraProduction = extra;
             bases[id].speed = speed;
 
-            io.emit('basePowerUpUpdate', id, speed, capacity);
+            io.emit('basePowerUpUpdate', id, speed, extra);
         });
     });
 }
@@ -145,8 +164,8 @@ function update(wt,delta) {
     baseRefilTimer+=delta/1000;
     if(baseRefilTimer > 1){
         bases.forEach(function(base){
-            if(base.troops >= SystemVar.productionThreshold && base.owner != null && base.troops < base.maxTroops+base.extraCapacity){
-                base.troops += base.baseRefillRate + Math.floor(base.troops/100);
+            if(base.owner != null && base.troops < base.maxTroops+base.extraCapacity){
+                base.troops += base.baseRefillRate + base.extraProduction; //+ Math.floor(base.troops/100);
                 base.troops = (base.troops > base.maxTroops+base.extraCapacity)? base.maxTroops+base.extraCapacity: base.troops;
             }
         });
@@ -181,6 +200,7 @@ function update(wt,delta) {
                         v2.defender.capacity = 0;
                         v2.defender.speed = 0;
                         v2.defender.troops = (v2.defender.troops < 0) ? -v2.defender.troops : 0;
+                        v2.defender.extraProduction = 0;
                         players[v2.defender.owner].bases.push(v2.defender.id);
                     }
 
@@ -221,18 +241,19 @@ function removePlayer(self, playerId) {
     console.log(self.players);
 }
 
-function createBase(self,x,y, baseRefillRate){
+function createBase(self,x,y, troops, baseRefillRate){
     var base = {
         id: bases.length,
         x: x,
         y: y,
-        troops: 0,
+        troops: troops,
         maxTroops: 1000,
         troopSpeed: 1,
         extraCapacity: 0,
         speed: 0,
         capacity: 0,
         baseRefillRate: baseRefillRate,
+        extraProduction: 0,
         attackRate: baseRefillRate,
         sprite: self.add.sprite(x,y, 'circle'),
         owner: null,

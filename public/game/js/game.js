@@ -13,12 +13,18 @@ const SystemVar = {
     StartTroops: 100,
     ActionLineWidth: 4,
     ActionLineColor: 0xaa00aa,
-    TroopTravelSpeed: 80,
+    TroopTravelSpeed: 30,
     cost: [100,500,1000],
-    speed: [1,1.5,3,5],
+    speed: [1,1.2,1.5,1.8],
+    capacity: [0,300, 300, 400],
+    troopCost: 25,
 
     //UISettings
     MenuDepth: 500,
+
+    //
+    capacityID : 0,
+    speedID: 1.
 }
 
 
