@@ -22,19 +22,19 @@ class MenuItem extends Phaser.GameObjects.Text
         });
         this.selectAnim.pause();
         
-        this.hoverSound = this.load.audio('hover', [
-        '../assets/' + hoverSound + ".mp3",
-        '../assets/' + hoverSound + ".ogg"
-        ],{
-            instances: 2
-        });
-        
-        this.selectSound = this.load.audio('select', [
-        '../assets/' + selectSound + ".mp3",
-        '../assets/' + selectSound + ".ogg"
-        ],{
-            instances: 2
-        });
+        // this.hoverSound = this.load.audio('hover', [
+        // '../assets/' + hoverSound + ".mp3",
+        // '../assets/' + hoverSound + ".ogg"
+        // ],{
+        //     instances: 2
+        // });
+        //
+        // this.selectSound = this.load.audio('select', [
+        // '../assets/' + selectSound + ".mp3",
+        // '../assets/' + selectSound + ".ogg"
+        // ],{
+        //     instances: 2
+        // });
     }
     
     select()
