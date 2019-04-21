@@ -1,8 +1,8 @@
 class MenuItem extends Phaser.GameObjects.Text
 {
-    constructor(scene, text, x, y, newScene)
+    constructor(scene, text, x, y, newScene, size, hoverSound, selectSound)
     {
-        super(scene, x, y, text);
+        super(scene, x, y, text, { font: size + 'px Arial' });
         scene.add.existing(this)
         this.setInteractive();
         this.scenePlugin = scene.sys.scenePlugin;
@@ -20,12 +20,28 @@ class MenuItem extends Phaser.GameObjects.Text
             loop: -1,
             yoyo: true
         });
-        this.selectAnim.stop()
+        this.selectAnim.pause();
+        
+        this.hoverSound = this.load.audio('hover', [
+        '../assets/' + hoverSound + ".mp3",
+        '../assets/' + hoverSound + ".ogg"
+        ],{
+            instances: 2
+        });
+        
+        this.selectSound = this.load.audio('select', [
+        '../assets/' + selectSound + ".mp3",
+        '../assets/' + selectSound + ".ogg"
+        ],{
+            instances: 2
+        });
     }
     
     select()
     {
-        this.selectAnim.resume();
+        console.log("over");
+        this.selectAnim.restart();
+        
     }
     
     deselect()
