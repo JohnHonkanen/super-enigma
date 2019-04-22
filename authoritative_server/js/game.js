@@ -71,18 +71,22 @@ function create() {
         createBase(self, x - 150, y, (c)? troops[2]: 0, SystemVar.baseRefillRate);
     }
 
-    quadSpawner(1300,750, true, [300,300,300,50,300]);
+    quadSpawner(1300,750, true, [1000,300,300,50,50]);
     quadSpawner(900,500, true, [1500,700,700,700,700]);
-    quadSpawner(500,250, true, [300,300,300,300,50]);
+    quadSpawner(500,250, true, [1000,300,300,50,50]);
 
-    quadSpawner(1300,250, true, [300,300,300,50,300]);
-    quadSpawner(500,750, true, [300,300,300,300,50]);
+    quadSpawner(1300,250, true, [1000,300,300,50,50]);
+    quadSpawner(500,750, true, [1000,300,300,50,50]);
 
     horizontalSpawner(200, 500, false, []);
     horizontalSpawner(1600, 500, false, []);
 
-    verticalSpawner(900, 150, false, []);
-    verticalSpawner(900, 850, false, []);
+    verticalSpawner(900, 130, false, []);
+    verticalSpawner(900, 870, false, []);
+
+    //ChokePoint bases
+    createBase(self,900, 230, 1000, SystemVar.baseRefillRate);
+    createBase(self,900, 770, 1000, SystemVar.baseRefillRate);
 
     io.on('connection', function (socket) {
         console.log('a user connected');
@@ -106,6 +110,7 @@ function create() {
             players[socket.id].bases.forEach(function(el){
                 bases[el].owner = null;
                 bases[el].capacity =0;
+                bases[el].troops = 0;
                 bases[el].speed = 0;
                 bases[el].troopSpeed = 1;
                 bases[el].extraCapacity = 0;
@@ -132,7 +137,7 @@ function create() {
             delete CombatManager.combats;
             CombatManager.combats = {};
             bases.forEach(function(base){
-                base.troops = 0;
+                base.troops = base.initialTroops;
                 base.owner = null;
                 base.capacity = 0;
                 base.speed = 0;
@@ -209,7 +214,7 @@ function update(wt,delta) {
                         [generateUniqueNum(v2.attacker.x,v2.attacker.y)]
                         [generateUniqueNum(v2.defender.x,v2.defender.y)];
 
-                    io.emit('resolveCombat', v2.attacker, v2.defender, state);
+                    io.emit('resolveCombat', v2.attacker, v2.defender, state, v2.attackerPlayer, v2.defendingPlayer);
 
                 }
             }
@@ -247,6 +252,7 @@ function createBase(self,x,y, troops, baseRefillRate){
         x: x,
         y: y,
         troops: troops,
+        initialTroops: troops,
         maxTroops: 1000,
         troopSpeed: 1,
         extraCapacity: 0,
@@ -300,6 +306,7 @@ function resolveBaseAction(socket,b1, b2){
 
         let combat = {
             attackerPlayer: base1.owner,
+            defendingPlayer: base2.owner,
             attacker: base1,
             defender: base2,
             troops: Math.ceil(base1.troops/2),

@@ -42,6 +42,11 @@ class Level1 extends Phaser.Scene{
 
         this.load.image('bg', 'assets/background/bg.jpg');
 
+        //SFX
+        for(const o of Object.values(AudioManager)){
+            this.load.audio(o.name, ['assets/audio/sfx/' + o.file]);
+        }
+
     }
 
     create() {
@@ -166,10 +171,27 @@ class Level1 extends Phaser.Scene{
             addCombat(self, base1, base2);
         });
         //Recieve Combat Resolve Status :: TODO
-        this.socket.on('resolveCombat', function(base1, base2, state){
+        this.socket.on('resolveCombat', function(base1, base2, state, at, df){
+
+            if(state == 1) {
+                if (at == self.player.playerId) {
+                    AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.Claim);
+                }
+                else if (df == self.player.playerId) {
+                    AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.Lost);
+                }
+            }
+
             if(base2.owner == self.player.playerId){
                 self.bases[base2.id].sprite.setTint(SystemVar.PlayerColor);
                 if(state == 1){
+                    if(at == self.player.playerId){
+                        AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.Claim);
+                    }
+                    else if(df == self.player.playerId){
+                        AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.Lost);
+                    }
+
                     self.bases[base2.id].speed =  0;
                     self.bases[base2.id].capacity= 0;
                     self.player.totalProduction -= self.bases[base2.id].extraProduction;
@@ -274,6 +296,7 @@ class Level1 extends Phaser.Scene{
                     self.actionData.selected.extraProduction,
                     SystemVar.troopCost*(self.player.totalProduction-1));
 
+                AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.PUpgrade);
             }
         });
 
@@ -288,6 +311,8 @@ class Level1 extends Phaser.Scene{
                         self.actionData.selected.speed,
                         self.actionData.selected.extraProduction,
                         SystemVar.cost[self.actionData.selected.speed-1]);
+
+                    AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.SpUpgrade);
                 }
         });
 
@@ -410,7 +435,7 @@ function createBase(self,base){
         y: base.y,
         troops: base.troops,
         sprite: self.add.sprite(base.x,base.y, 'base').setInteractive(),
-        shape: new Phaser.Geom.Circle(base.x, base.y, 50),
+        shape: new Phaser.Geom.Circle(base.x, base.y, 85),
         text: self.add.text(base.x-10,base.y-50, 0, {align: 'center'}),
         speedIcon:  self.add.sprite(-100,base.y-25, 'sp1'),
         capIcon:  self.add.sprite(-100,base.y-0, 'cp1'),
@@ -425,6 +450,10 @@ function createBase(self,base){
                     if(self.actionData.selected.id == nBase.id &&  self.actionData.selected.extraProduction > 0){
                         self.actionData.selected.extraProduction--;
                         self.player.totalProduction--;
+
+
+                        AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.PDowngrade);
+
                         self.socket.emit('basePowerup',
                             self.actionData.selected.id,
                             self.actionData.selected.speed,
@@ -451,7 +480,8 @@ function createBase(self,base){
     };
 
     nBase.sprite.displayWidth = 100;
-    nBase.sprite.displayHeight = 100;
+    nBase.sprite.displayHeight = 60;
+    nBase.sprite.angle = -25;
 
     if(nBase.owner != self.player.playerId && nBase.owner !== null){
         nBase.sprite.setTint(SystemVar.EnemyColor);
@@ -483,8 +513,9 @@ function actionManager(self, baseId, base, action){
     let updateServer = false;
 
     if(!action.started){
-        action.started = true;
-        if(base.owner === null){
+
+        if(base.owner === null && base.troops == 0){
+            action.started = true;
             base.owner = self.player.playerId;
             base.troops = SystemVar.StartTroops;
             self.player.bases.push(baseId);
@@ -553,7 +584,7 @@ function addCombat(self,base1, base2){
             icon.setTint(SystemVar.EnemyColor);
         }
         const combat = {
-            attackerPlyer: base1.owner,
+            attackerPlayer: base1.owner,
             attacker: base1,
             defender: base2,
             line: line,
@@ -565,6 +596,24 @@ function addCombat(self,base1, base2){
         self.actionData.actionLineIcon.x = -1000;
 
         CombatManager.combats[uniqId1][uniqId2] = combat;
+        console.log(combat.attackerPlayer);
+        console.log(self.player.playerId);
+
+        if(combat.attackerPlayer == self.player.playerId){
+
+            if(combat.attacker.owner == combat.defender.owner){
+                AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.Defend);
+            }
+            else{
+                AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.Attack);
+            }
+        }else{
+            if(combat.defender.owner == self.player.playerId ){
+                AudioManager.HelperFunction.playAudio(self, AudioManager, AudioManager.Spotted);
+            }
+        }
+
+
     }
 }
 //Generate 1D Unique Number based on 2D values;
