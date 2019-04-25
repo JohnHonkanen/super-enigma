@@ -31,8 +31,8 @@ class Menu extends Phaser.Scene
         });
 
         var startText = new MenuItem(this, 'Start Game', 35, 200, 'Level1', 30, 'hover', 'select');
-        var hiScoreText = new MenuItem(this, 'Highscores', 35, 250, 'High Scores', 30, 'hover', 'select');
-        var exitText = new MenuItem(this, 'Exit', 35, 300, 'Exit', 30, 'hover', 'select');
+        // var hiScoreText = new MenuItem(this, 'Highscores', 35, 250, 'High Scores', 30, 'hover', 'select');
+        // var exitText = new MenuItem(this, 'Exit', 35, 300, 'Exit', 30, 'hover', 'select');
 
     }
 }
