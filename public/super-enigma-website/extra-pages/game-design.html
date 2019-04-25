@@ -17,9 +17,9 @@
 
  	<!-- CSS
    ================================================== -->
-   <link rel="stylesheet" href="../css/base.css">
-   <link rel="stylesheet" href="../css/vendor.min.css">
-   <link rel="stylesheet" href="../css/main.css">     
+   <link rel="stylesheet" href="/css/base.css">
+   <link rel="stylesheet" href="/css/vendor.min.css">
+   <link rel="stylesheet" href="/css/main.css">
 
    <!-- script
    ================================================== -->
@@ -199,6 +199,7 @@
 								<li>Power-ups to boost player owned territories. </li>
 								<li>Looped background music.</li>
 								<li>Background canvas / image</li>
+								<li>Balancing & placement of territories</li>
 							</ul>
 
 							<p>
@@ -244,14 +245,16 @@
 
 				<p>
 					Units produced by player territories can be spent to utilize temporary power-up boosts to any of the players territory. Boosts can vary between increased unit
-					production or increased movement to give the players defense or attack an extra edge. Only one territory boost can be built on a territory in exchange for units.
-					Each territory boost can be upgraded up to 3x. Territory boosts will be lost when the territory is lost to another player.
+					production or increased movement to give the players defense or attack an extra edge. Each territory boost can be upgraded over several tiers in return for units.
+					The cost of territory boots is shared globally per player and increases each time the players territory is upgraded.
+					Territory boosts will be lost when the territory is lost to another player.
 				</p>
 
 				<p>
 					Unit count on territories tick up every game tick. Units can be sent to defend, attack and acquire new territory for the player.
 					When movement orders are given to a territory, half the units in the territory will be given the order and the instruction will be carried out immediately.
-					One territory can perform multiple instructions provided it's not towards the same territory. For example: Territory A has sent instructions to attack territory B and C.
+					One territory can perform multiple instructions provided it's not towards the same territory and there is no territory blocking the path.
+					For example: Territory A has sent instructions to attack territory B and C.
 					However, Territory A cannot send extra troops to attack territory B until the previous attack instruction is completed.
 				</p>
 
@@ -262,9 +265,9 @@
 					and 50 units remain to defend the newly acquired territory.
 
 				<p>
-					For unit counts to increase on a players territory, there needs to be at least 30 units present. Therefore, the player may need to ensure that after a successful territory takeover that additional
-					units are sent to defend the new territory while maintaining greater than 30 units to allow the territory to produce extra units. The total number of units on a single territory is 1,0000. If the territory exceeds 1,000 units, the unit production
-					on the territory will be paused until the total unit count on the territory is less than 1,000.
+				    The total number of units a territory can hold before it stops producing new ones is 5,000. If the territory exceeds 5,000 units, the unit production on the
+					territory will be paused until the total unit count on the territory is less than 5,000. Unit counts can however increase past 5,000 by reinforcing the territory using units
+					from other territories.
 				</p>
 				</p>
 
