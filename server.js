@@ -19,12 +19,23 @@ app.get('/', function(req, res){
     res.sendFile(__dirname + '/public/super-enigma-website/index.html');
 });
 
-app.get('/game/', function(req,res){
-   res.sendFile(__dirname + '/public/game/game.html');
+app.get('/game-design', function(req,res){
+    res.sendFile(__dirname + '/public/super-enigma-website/extra-pages/game-design.html');
 });
 
-app.get('/sample/', function(req,res){
-    res.sendFile(__dirname + '/public/sample.html');
+app.get('/project-management', function(req,res){
+    res.sendFile(__dirname + '/public/super-enigma-website/extra-pages/project-management.html');
+});
+
+app.get('/team', function(req,res){
+    res.sendFile(__dirname + '/public/super-enigma-website/extra-pages/team.html');
+});
+
+app.get('/game/', function(req,res){
+    res.sendFile(__dirname + '/public/game/game.html');
+});
+app.get('/game/', function(req,res){
+   res.sendFile(__dirname + '/public/game/game.html');
 });
 
 var port = process.env.PORT | 8080;
